@@ -1,27 +1,52 @@
 ﻿
-int menuChoice;
 Console.WriteLine("Welcome to emptycode's math quiz game! :)");
-Console.Write("Enter 1 to Start or 2 to View Previous Games:");
-menuChoice = int.Parse(Console.ReadLine());
+while (true)
+{
+    int menuChoice;
+    Console.WriteLine("Enter:\n1: Start\n2: View Previous Games\n3: Exit");
+    menuChoice = int.Parse(Console.ReadLine());
 
-switch (menuChoice) {
-    case 1:
-        getQuestions(getOperatorChoice());
-        break;
-    case 2:
-        Console.WriteLine();
-        break;
-    default:
-        Console.WriteLine("Error!, Enter 1 to Start or 2 to View Previous Games");
-        break;  
+    switch (menuChoice)
+    {
+        case 1:
+            Console.Clear();
+            getQuestions(getOperatorChoice());
+            break;
+        case 2:
+            Console.Clear();
+            Console.WriteLine();
+            break;
+        case 3:
+            return;
+        default:
+            Console.WriteLine("Error! Invalid option.\n");
+            break;
+    }
+   
 }
+
 
 char getOperatorChoice()
 {
-    char operatorChoice;
-    Console.WriteLine("Choose an operation using the options below:");
-    Console.WriteLine("'+' for addition\n'-' for subtraction\n'*' for multiplication\n'/' for division");
-    return operatorChoice = char.Parse(Console.ReadLine());
+    while(true)
+    {
+        char operatorChoice;
+        Console.WriteLine("Choose an operation using the options below:");
+        Console.WriteLine("'+' for addition\n'-' for subtraction\n'*' for multiplication\n'/' for division");
+        operatorChoice = char.Parse(Console.ReadLine());
+
+
+        if (operatorChoice == '+' || operatorChoice == '-' || operatorChoice == '*' || operatorChoice == '/')
+        {
+            Console.Clear();
+            return operatorChoice;
+        }
+        else
+        {
+            Console.WriteLine("Error!, Invalid option.\n");
+            continue;
+        }
+    }
 }
 
 // generates five questions using the operator chosen
@@ -93,7 +118,7 @@ void getQuestions(char operatorChoice)
         }
     }
 
-    Console.WriteLine($"You got {correctCount}/5 questions correct!");
+    Console.WriteLine($"\nYou got {correctCount}/5 questions correct!\n");
 
 }
 
