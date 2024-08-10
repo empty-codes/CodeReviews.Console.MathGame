@@ -1,4 +1,5 @@
-﻿
+﻿List<string> previousGames = new List<string>(); // creates List to record results
+
 Console.WriteLine("Welcome to emptycode's math quiz game! :)");
 while (true)
 {
@@ -14,7 +15,7 @@ while (true)
             break;
         case 2:
             Console.Clear();
-            Console.WriteLine();
+            getPreviousGames();
             break;
         case 3:
             return;
@@ -22,9 +23,7 @@ while (true)
             Console.WriteLine("Error! Invalid option.\n");
             break;
     }
-   
 }
-
 
 char getOperatorChoice()
 {
@@ -34,7 +33,6 @@ char getOperatorChoice()
         Console.WriteLine("Choose an operation using the options below:");
         Console.WriteLine("'+' for addition\n'-' for subtraction\n'*' for multiplication\n'/' for division");
         operatorChoice = char.Parse(Console.ReadLine());
-
 
         if (operatorChoice == '+' || operatorChoice == '-' || operatorChoice == '*' || operatorChoice == '/')
         {
@@ -66,7 +64,7 @@ void getQuestions(char operatorChoice)
         a = random.Next(0, 101);
         b = random.Next(1, 101); // starts at 1 since division by 0 results in an error
 
-        switch(operatorChoice)
+        switch (operatorChoice)
         {
             case '+':
                 Console.Write($"Question {i}/5: {a} + {b} = ");
@@ -74,18 +72,21 @@ void getQuestions(char operatorChoice)
                 correctAnswer = a + b;
                 isCorrect(userAnswer, correctAnswer);
                 break;
+
             case '-':
                 Console.Write($"Question {i}/5: {a} - {b} = ");
                 userAnswer = int.Parse(Console.ReadLine());
                 correctAnswer = a - b;
                 isCorrect(userAnswer, correctAnswer);
                 break;
+
             case '*':
                 Console.Write($"Question {i}/5: {a} * {b} = ");
                 userAnswer = int.Parse(Console.ReadLine());
                 correctAnswer = a * b;
                 isCorrect(userAnswer, correctAnswer);
                 break;
+
             case '/':
                 // ensures division results in integers only
                 while(a % b != 0)
@@ -98,6 +99,7 @@ void getQuestions(char operatorChoice)
                 correctAnswer = a / b;
                 isCorrect(userAnswer, correctAnswer);
                 break;
+
             default:
                 Console.WriteLine("");
                 break;
@@ -111,15 +113,26 @@ void getQuestions(char operatorChoice)
             Console.WriteLine("Correct!");
             correctCount++;
         }
-
         if (userAnswer != correctAnswer)
         {
             Console.WriteLine($"Wrong! {a} {operatorChoice} {b} = {correctAnswer}");
         }
     }
-
     Console.WriteLine($"\nYou got {correctCount}/5 questions correct!\n");
-
+    //stores operator and number of correct answers in the created list
+    previousGames.Add($"Operator: {operatorChoice}\nCorrect Answers: {correctCount}");
 }
 
-Console.ReadLine();
+void getPreviousGames()
+{
+    if (previousGames.Count > 0)
+    {
+        Console.WriteLine("Previous Game History: ");
+        // displays results for each game stored as a list object
+        for (int i = 0; i < previousGames.Count; i++)
+        {
+            Console.WriteLine($"\nGame {i+ 1}\n--------\n{previousGames[i]}\n");
+        }
+    }
+    else Console.WriteLine("No previous games are recorded.\n");
+}
