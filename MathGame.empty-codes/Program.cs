@@ -60,7 +60,7 @@ while (true)
             break;
     }
 }
-char GetOperatorChoice()
+void GetOperatorChoice()
 {
     while(true)
     {
@@ -71,7 +71,7 @@ char GetOperatorChoice()
         if (operatorChoice == '+' || operatorChoice == '-' || operatorChoice == '*' || operatorChoice == '/')
         {
             Console.Clear();
-            return operatorChoice;
+            break;
         }
         else
         {
