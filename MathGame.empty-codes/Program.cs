@@ -1,4 +1,5 @@
-﻿List<string> previousGames = new List<string>(); // creates List to record results
+﻿// Creates List to record results.
+List<string> previousGames = new List<string>(); 
 
 Console.WriteLine("Welcome to emptycode's math quiz game! :)");
 while (true)
@@ -11,11 +12,11 @@ while (true)
     {
         case 1:
             Console.Clear();
-            getQuestions(getOperatorChoice());
+            GetQuestions(GetOperatorChoice());
             break;
         case 2:
             Console.Clear();
-            getPreviousGames();
+            GetPreviousGames();
             break;
         case 3:
             return;
@@ -25,7 +26,7 @@ while (true)
     }
 }
 
-char getOperatorChoice()
+char GetOperatorChoice()
 {
     while(true)
     {
@@ -47,8 +48,8 @@ char getOperatorChoice()
     }
 }
 
-// generates five questions using the operator chosen
-void getQuestions(char operatorChoice)
+// Generates five questions using the operator chosen.
+void GetQuestions(char operatorChoice)
 {
     int a;
     int b;
@@ -56,13 +57,14 @@ void getQuestions(char operatorChoice)
     int userAnswer;
     int correctAnswer;
 
-    //  generates and displays the five questions
+    //  Generates and displays the five questions.
     for (int i = 1; i < 6; i++)
     {
-        // randomly generates operands a and b
+        // Randomly generates operands a and b.
         Random random = new Random();
         a = random.Next(0, 101);
-        b = random.Next(1, 101); // starts at 1 since division by 0 results in an error
+        // Starts at 1 since division by 0 results in an error.
+        b = random.Next(1, 101); 
 
         switch (operatorChoice)
         {
@@ -70,25 +72,25 @@ void getQuestions(char operatorChoice)
                 Console.Write($"Question {i}/5: {a} + {b} = ");
                 userAnswer = int.Parse(Console.ReadLine());
                 correctAnswer = a + b;
-                isCorrect(userAnswer, correctAnswer);
+                IsCorrect(userAnswer, correctAnswer);
                 break;
 
             case '-':
                 Console.Write($"Question {i}/5: {a} - {b} = ");
                 userAnswer = int.Parse(Console.ReadLine());
                 correctAnswer = a - b;
-                isCorrect(userAnswer, correctAnswer);
+                IsCorrect(userAnswer, correctAnswer);
                 break;
 
             case '*':
                 Console.Write($"Question {i}/5: {a} * {b} = ");
                 userAnswer = int.Parse(Console.ReadLine());
                 correctAnswer = a * b;
-                isCorrect(userAnswer, correctAnswer);
+                IsCorrect(userAnswer, correctAnswer);
                 break;
 
             case '/':
-                // ensures division results in integers only
+                // Ensures division results in integers only.
                 while(a % b != 0)
                 {
                     b = random.Next(1, 101);
@@ -97,7 +99,7 @@ void getQuestions(char operatorChoice)
                 Console.Write($"Question {i}/5: {a} / {b} = ");
                 userAnswer = int.Parse(Console.ReadLine());
                 correctAnswer = a / b;
-                isCorrect(userAnswer, correctAnswer);
+                IsCorrect(userAnswer, correctAnswer);
                 break;
 
             default:
@@ -106,7 +108,7 @@ void getQuestions(char operatorChoice)
         } 
     }
 
-    void isCorrect(int userAnswer, int correctAnswer)
+    void IsCorrect(int userAnswer, int correctAnswer)
     {
         if (userAnswer == correctAnswer)
         {
@@ -119,16 +121,16 @@ void getQuestions(char operatorChoice)
         }
     }
     Console.WriteLine($"\nYou got {correctCount}/5 questions correct!\n");
-    //stores operator and number of correct answers in the created list
+    // Stores operator and number of correct answers in the created list.
     previousGames.Add($"Operator: {operatorChoice}\nCorrect Answers: {correctCount}");
 }
 
-void getPreviousGames()
+void GetPreviousGames()
 {
     if (previousGames.Count > 0)
     {
         Console.WriteLine("Previous Game History: ");
-        // displays results for each game stored as a list object
+        // Displays results for each game stored as a list object.
         for (int i = 0; i < previousGames.Count; i++)
         {
             Console.WriteLine($"\nGame {i+ 1}\n--------\n{previousGames[i]}\n");
